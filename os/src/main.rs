@@ -10,7 +10,7 @@ mod lang_items;
 mod sbi;
 mod syscall;
 mod trap;
-mod batch;
+pub mod batch;
 
 global_asm!(include_str!("entry.asm"));
 global_asm!(include_str!("link_app.S"));
