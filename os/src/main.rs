@@ -15,7 +15,9 @@ mod loader;
 mod config;
 mod task;
 mod timer;
+mod comlog;
 
+use log::{*};
 global_asm!(include_str!("entry.asm"));
 global_asm!(include_str!("link_app.S"));
 
@@ -33,6 +35,8 @@ fn clear_bss() {
 pub fn rust_main() -> ! {
     clear_bss();
     println!("[kernel] Hello, world!");
+    comlog::init();
+    info!("[kernel] init comlog OK");
     trap::init();
     loader::load_apps();
     trap::enable_timer_interrupt();
