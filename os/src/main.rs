@@ -10,7 +10,9 @@ mod lang_items;
 mod sbi;
 mod syscall;
 mod trap;
+mod comlog;
 pub mod batch;
+use log::{*};
 
 global_asm!(include_str!("entry.asm"));
 global_asm!(include_str!("link_app.S"));
@@ -29,6 +31,7 @@ fn clear_bss() {
 pub fn rust_main() -> ! {
     clear_bss();
     println!("[kernel] Hello, world!");
+    comlog::init();
     trap::init();
     batch::init();
     batch::run_next_app();
