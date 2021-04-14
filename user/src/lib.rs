@@ -38,3 +38,12 @@ pub fn write(fd: usize, buf: &[u8]) -> isize { sys_write(fd, buf) }
 pub fn exit(exit_code: i32) -> isize { sys_exit(exit_code) }
 pub fn yield_() -> isize { sys_yield() }
 pub fn get_time() -> isize { sys_get_time() }
+pub fn sleep(period_ms: usize) {
+    let start = get_time();
+    while get_time() < start + period_ms as isize {
+        sys_yield();
+    }
+}
+pub fn set_priority(prio: isize) -> isize {
+    sys_set_priority(prio)
+}
