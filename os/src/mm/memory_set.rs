@@ -151,6 +151,7 @@ impl MemorySet {
                     map_perm,
                 );
                 max_end_vpn = map_area.vpn_range.get_end();
+                // println!("{:#X} ~ {:#X}", start_va.0 , end_va.0);
                 memory_set.push(
                     map_area,
                     Some(&elf.input[ph.offset() as usize..(ph.offset() + ph.file_size()) as usize])
@@ -169,6 +170,7 @@ impl MemorySet {
             MapType::Framed,
             MapPermission::R | MapPermission::W | MapPermission::U,
         ), None);
+        // println!("{:#X} ~ {:#X}", user_stack_bottom, user_stack_top);
         // map TrapContext
         memory_set.push(MapArea::new(
             TRAP_CONTEXT.into(),
@@ -176,6 +178,7 @@ impl MemorySet {
             MapType::Framed,
             MapPermission::R | MapPermission::W,
         ), None);
+        // println!("{:#X} ~ {:#X}", TRAP_CONTEXT , TRAMPOLINE);
         (memory_set, user_stack_top, elf.header.pt2.entry_point() as usize)
     }
     pub fn activate(&self) {
@@ -187,6 +190,16 @@ impl MemorySet {
     }
     pub fn translate(&self, vpn: VirtPageNum) -> Option<PageTableEntry> {
         self.page_table.translate(vpn)
+    }
+    pub fn find_vpn(&self, vpn: VirtPageNum) -> bool {
+        self.page_table.find_vpn(vpn)
+    }
+    pub fn munmap(&mut self, vpn: VirtPageNum){
+        //为了简单，参数错误时不考虑内存的恢复和回收。
+        // for i in 0..(self.areas.len()) {
+        //     self.areas[i].unmap_one(&mut self.page_table, vpn);
+        // }
+        self.areas[0].unmap_one(&mut self.page_table, vpn);
     }
 }
 

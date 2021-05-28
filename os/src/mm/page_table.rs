@@ -75,6 +75,9 @@ impl PageTable {
         }
     }
     fn find_pte_create(&mut self, vpn: VirtPageNum) -> Option<&mut PageTableEntry> {
+        // if vpn.0 == 65537 as usize {
+        //     println!("Create!!!");
+        // }
         let idxs = vpn.indexes();
         let mut ppn = self.root_ppn;
         let mut result: Option<&mut PageTableEntry> = None;
@@ -112,6 +115,7 @@ impl PageTable {
     }
     #[allow(unused)]
     pub fn map(&mut self, vpn: VirtPageNum, ppn: PhysPageNum, flags: PTEFlags) {
+        // println!("map_pte {}", vpn.0);
         let pte = self.find_pte_create(vpn).unwrap();
         assert!(!pte.is_valid(), "vpn {:?} is mapped before mapping", vpn);
         *pte = PageTableEntry::new(ppn, flags | PTEFlags::V);
@@ -125,6 +129,12 @@ impl PageTable {
     pub fn translate(&self, vpn: VirtPageNum) -> Option<PageTableEntry> {
         self.find_pte(vpn)
             .map(|pte| {pte.clone()})
+    }
+    pub fn find_vpn(&self, vpn: VirtPageNum) -> bool {
+        match self.find_pte(vpn) {
+            None => false,
+            Some(x) => x.is_valid(),
+        }
     }
     pub fn token(&self) -> usize {
         8usize << 60 | self.root_ppn.0

@@ -28,3 +28,10 @@ pub fn write(fd: usize, buf: &[u8]) -> isize { sys_write(fd, buf) }
 pub fn exit(exit_code: i32) -> isize { sys_exit(exit_code) }
 pub fn yield_() -> isize { sys_yield() }
 pub fn get_time() -> isize { sys_get_time() }
+pub fn mmap(start: usize, len: usize, prot: usize) -> isize {
+    sys_mmap(start, len, prot)
+}
+
+pub fn munmap(start: usize, len: usize) -> isize {
+    sys_munmap(start, len)
+}

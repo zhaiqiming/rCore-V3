@@ -1,0 +1,38 @@
+(rustup target list | grep "riscv64gc-unknown-none-elf (installed)") || rustup target add riscv64gc-unknown-none-elf
+riscv64gc-unknown-none-elf (installed)
+cargo install cargo-binutils --vers ~0.2
+rustup component add rust-src
+rustup component add llvm-tools-preview
+rust-objcopy --binary-architecture=riscv64 target/riscv64gc-unknown-none-elf/release/00ch4_unmap --strip-all -O binary  target/riscv64gc-unknown-none-elf/release/00ch4_unmap.bin;
+Platform: qemu
+[rustsbi] RustSBI version 0.2.0-alpha.1
+.______       __    __      _______.___________.  _______..______   __
+|   _  \     |  |  |  |    /       |           | /       ||   _  \ |  |
+|  |_)  |    |  |  |  |   |   (----`---|  |----`|   (----`|  |_)  ||  |
+|      /     |  |  |  |    \   \       |  |      \   \    |   _  < |  |
+|  |\  \----.|  `--'  |.----)   |      |  |  .----)   |   |  |_)  ||  |
+| _| `._____| \______/ |_______/       |__|  |_______/    |______/ |__|
+
+[rustsbi] Platform: QEMU (Version 0.2.0)
+[rustsbi] misa: RV64ACDFIMSU
+[rustsbi] mideleg: 0x222
+[rustsbi] medeleg: 0xb1ab
+[rustsbi-dtb] Hart count: cluster0 with 1 cores
+[rustsbi] Kernel entry: 0x80200000
+[kernel] Hello, world!
+.text [0x80200000, 0x8020c000)
+.rodata [0x8020c000, 0x80210000)
+.data [0x80210000, 0x80219000)
+.bss [0x80219000, 0x8052a000)
+mapping .text section
+mapping .rodata section
+mapping .data section
+mapping .bss section
+mapping physical memory
+[kernel] back to world!
+remap_test passed!
+init TASK_MANAGER
+num_app = 1
+from to 65536 65537
+from to 65537 65539
+[kernel] Panicked at src/mm/page_table.rs:126 vpn VPN:0x10000 is invalid before unmapping

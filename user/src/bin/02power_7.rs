@@ -20,7 +20,7 @@ unsafe fn main() -> i32 {
         S[next] = S[cur] * p % m;
         cur = next;
         if i % 10000 == 0 {
-            println!("power_7 [{}/{}]", i, iter);
+            // println!("power_7 [{}/{}]", i, iter);
         }
     }
     println!("{}^{} = {}(mod {})", p, iter, S[cur], m);
