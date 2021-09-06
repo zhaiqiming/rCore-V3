@@ -40,6 +40,7 @@ impl Processor {
                 task_inner.task_status = TaskStatus::Running;
                 drop(task_inner);
                 // release
+                // println!("now : {}" , task.pid.0);
                 self.inner.borrow_mut().current = Some(task);
                 unsafe {
                     __switch(
@@ -86,6 +87,7 @@ pub fn current_trap_cx() -> &'static mut TrapContext {
 
 pub fn schedule(switched_task_cx_ptr2: *const usize) {
     let idle_task_cx_ptr2 = PROCESSOR.get_idle_task_cx_ptr2();
+    // println!("sw");
     unsafe {
         __switch(
             switched_task_cx_ptr2,

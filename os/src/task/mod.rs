@@ -52,7 +52,7 @@ pub fn exit_current_and_run_next(exit_code: i32) {
     // Record exit code
     inner.exit_code = exit_code;
     // do not move to its parent but under initproc
-
+    
     // ++++++ hold initproc PCB lock here
     {
         let mut initproc_inner = INITPROC.acquire_inner_lock();
@@ -62,7 +62,7 @@ pub fn exit_current_and_run_next(exit_code: i32) {
         }
     }
     // ++++++ release parent PCB lock here
-
+    
     inner.children.clear();
     // deallocate user space
     inner.memory_set.recycle_data_pages();
@@ -71,6 +71,7 @@ pub fn exit_current_and_run_next(exit_code: i32) {
     // drop task manually to maintain rc correctly
     drop(task);
     // we do not have to save task context
+    // println!("exit over");
     let _unused: usize = 0;
     schedule(&_unused as *const _);
 }
