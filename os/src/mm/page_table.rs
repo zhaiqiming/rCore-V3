@@ -190,6 +190,28 @@ pub fn translated_str(token: usize, ptr: *const u8) -> String {
     string
 }
 
+pub fn translated_str_safe(token: usize, ptr: *const u8, len: usize) -> Option<String> {
+    let page_table = PageTable::from_token(token);
+    let mut string = String::new();
+    let mut va = ptr as usize;
+    let mut num = 0;
+    loop {
+        let mut ch: u8;
+        match page_table.translate_va(VirtAddr::from(va)) {
+            Some(x) => ch = *(x.get_mut()),
+            None => return None,
+        }
+        if num == len {
+            break;
+        } else {
+            string.push(ch as char);
+            va += 1;
+            num += 1;
+        }
+    }
+    Some(string)
+}
+
 pub fn translated_refmut<T>(token: usize, ptr: *mut T) -> &'static mut T {
     let page_table = PageTable::from_token(token);
     let va = ptr as usize;

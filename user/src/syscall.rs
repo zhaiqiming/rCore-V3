@@ -9,6 +9,8 @@ const SYSCALL_GETPID: usize = 172;
 const SYSCALL_FORK: usize = 220;
 const SYSCALL_EXEC: usize = 221;
 const SYSCALL_WAITPID: usize = 260;
+const SYSCALL_MAIL_READ: usize = 401;
+const SYSCALL_MAIL_WRITE: usize = 402;
 
 fn syscall(id: usize, args: [usize; 3]) -> isize {
     let mut ret: isize;
@@ -33,6 +35,20 @@ pub fn sys_pipe(pipe: &mut [usize]) -> isize {
 
 pub fn sys_read(fd: usize, buffer: &mut [u8]) -> isize {
     syscall(SYSCALL_READ, [fd, buffer.as_mut_ptr() as usize, buffer.len()])
+}
+
+pub fn sys_mail_read(buffer: &mut [u8]) -> isize {
+    syscall(
+        SYSCALL_MAIL_READ,
+        [buffer.as_ptr() as usize, buffer.len(), 0],
+    )
+}
+
+pub fn sys_mail_write(pid: usize, buffer: &[u8]) -> isize {
+    syscall(
+        SYSCALL_MAIL_WRITE,
+        [pid, buffer.as_ptr() as usize, buffer.len()],
+    )
 }
 
 pub fn sys_write(fd: usize, buffer: &[u8]) -> isize {

@@ -9,6 +9,8 @@ const SYSCALL_GETPID: usize = 172;
 const SYSCALL_FORK: usize = 220;
 const SYSCALL_EXEC: usize = 221;
 const SYSCALL_WAITPID: usize = 260;
+const SYSCALL_READ_MAIL: usize = 401;
+const SYSCALL_WRITE_MAIL: usize = 402;
 
 mod fs;
 mod process;
@@ -20,6 +22,8 @@ pub fn syscall(syscall_id: usize, args: [usize; 3]) -> isize {
     match syscall_id {
         SYSCALL_CLOSE => sys_close(args[0]),
         SYSCALL_PIPE => sys_pipe(args[0] as *mut usize),
+        SYSCALL_READ_MAIL => sys_read_mail(args[0] as *mut u8, args[1]),
+        SYSCALL_WRITE_MAIL => sys_write_mail(args[0], args[1] as *mut u8, args[2]),
         SYSCALL_READ => sys_read(args[0], args[1] as *const u8, args[2]),
         SYSCALL_WRITE => sys_write(args[0], args[1] as *const u8, args[2]),
         SYSCALL_EXIT => sys_exit(args[0] as i32),

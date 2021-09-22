@@ -12,6 +12,7 @@ pub use page_table::{
     PageTableEntry,
     translated_byte_buffer,
     translated_str,
+    translated_str_safe,
     translated_refmut,
     UserBuffer,
     UserBufferIterator,

@@ -5,6 +5,8 @@ use super::TaskContext;
 use super::{PidHandle, pid_alloc, KernelStack};
 use alloc::sync::{Weak, Arc};
 use alloc::vec;
+use alloc::string::String;
+use alloc::collections::VecDeque;
 use alloc::vec::Vec;
 use spin::{Mutex, MutexGuard};
 use crate::fs::{File, Stdin, Stdout};
@@ -27,9 +29,16 @@ pub struct TaskControlBlockInner {
     pub children: Vec<Arc<TaskControlBlock>>,
     pub exit_code: i32,
     pub fd_table: Vec<Option<Arc<dyn File + Send + Sync>>>,
+    pub mail_box: VecDeque<String>,
 }
 
 impl TaskControlBlockInner {
+    // pub fn get_message_from_mail_box() {
+
+    // }
+    // pub fn insert_message_to_mail_box() {
+        
+    // }
     pub fn get_task_cx_ptr2(&self) -> *const usize {
         &self.task_cx_ptr as *const usize
     }
@@ -85,6 +94,7 @@ impl TaskControlBlock {
                 parent: None,
                 children: Vec::new(),
                 exit_code: 0,
+                mail_box: VecDeque::new(),
                 fd_table: vec![
                     // 0 -> stdin
                     Some(Arc::new(Stdin)),
@@ -170,6 +180,7 @@ impl TaskControlBlock {
                 children: Vec::new(),
                 exit_code: 0,
                 fd_table: new_fd_table,
+                mail_box: parent_inner.mail_box.clone(),
             }),
         });
         // add child
