@@ -1,0 +1,127 @@
+Date : 2021-10-28 22:24:50
+Directory : /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3
+Total : 81 files,  5232 codes, 475 comments, 524 blanks, all 6231 lines
+
+Languages
++-----------------+------------+------------+------------+------------+------------+
+| language        | files      | code       | comment    | blank      | total      |
++-----------------+------------+------------+------------+------------+------------+
+| Rust            |         66 |      4,846 |        433 |        457 |      5,736 |
+| LinkerScript    |          3 |        121 |          0 |         17 |        138 |
+| Makefile        |          3 |         99 |          6 |         32 |        137 |
+| RISC-V Assembly |          3 |         88 |         27 |          5 |        120 |
+| TOML            |          4 |         45 |          4 |          9 |         58 |
+| Docker          |          1 |         31 |          5 |          4 |         40 |
+| Markdown        |          1 |          2 |          0 |          0 |          2 |
++-----------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                   |         81 |      5,232 |        475 |        524 |      6,231 |
+| easy-fs                                                                             |          8 |        916 |         61 |         66 |      1,043 |
+| easy-fs-fuse                                                                        |          2 |        160 |          8 |         12 |        180 |
+| easy-fs-fuse/src                                                                    |          1 |        151 |          7 |         10 |        168 |
+| easy-fs/src                                                                         |          7 |        908 |         60 |         64 |      1,032 |
+| os                                                                                  |         40 |      3,175 |        369 |        304 |      3,848 |
+| os/src                                                                              |         37 |      3,074 |        362 |        277 |      3,713 |
+| os/src/drivers                                                                      |          4 |        587 |        218 |         58 |        863 |
+| os/src/drivers/block                                                                |          3 |        585 |        218 |         57 |        860 |
+| os/src/fs                                                                           |          4 |        354 |         11 |         24 |        389 |
+| os/src/mm                                                                           |          6 |        942 |         29 |         58 |      1,029 |
+| os/src/syscall                                                                      |          3 |        229 |         18 |         19 |        266 |
+| os/src/task                                                                         |          8 |        507 |         59 |         53 |        619 |
+| os/src/trap                                                                         |          3 |        185 |         25 |         16 |        226 |
+| user                                                                                |         28 |        942 |         32 |        135 |      1,109 |
+| user/src                                                                            |         26 |        917 |         31 |        126 |      1,074 |
+| user/src/bin                                                                        |         21 |        687 |         29 |         87 |        803 |
++-------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| filename                                                                            | language        | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/Dockerfile                         | Docker          |         31 |          5 |          4 |         40 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/Makefile                           | Makefile        |          6 |          0 |          3 |          9 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/README.md                          | Markdown        |          2 |          0 |          0 |          2 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/easy-fs-fuse/Cargo.toml            | TOML            |          9 |          1 |          2 |         12 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/easy-fs-fuse/src/main.rs           | Rust            |        151 |          7 |         10 |        168 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/easy-fs/Cargo.toml                 | TOML            |          8 |          1 |          2 |         11 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/easy-fs/src/bitmap.rs              | Rust            |         63 |          2 |          8 |         73 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/easy-fs/src/block_cache.rs         | Rust            |        109 |          4 |         15 |        128 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/easy-fs/src/block_dev.rs           | Rust            |          5 |          0 |          2 |          7 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/easy-fs/src/efs.rs                 | Rust            |        139 |          7 |         11 |        157 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/easy-fs/src/layout.rs              | Rust            |        400 |         36 |         12 |        448 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/easy-fs/src/lib.rs                 | Rust            |         15 |          0 |          3 |         18 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/easy-fs/src/vfs.rs                 | Rust            |        177 |         11 |         13 |        201 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/Cargo.toml                      | TOML            |         20 |          1 |          3 |         24 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/Makefile                        | Makefile        |         76 |          6 |         22 |        104 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/build.rs                        | Rust            |          5 |          0 |          2 |          7 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/config.rs                   | Rust            |         34 |          2 |          6 |         42 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/console.rs                  | Rust            |         26 |          0 |          8 |         34 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/drivers/block/mod.rs        | Rust            |         25 |          0 |          5 |         30 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/drivers/block/sdcard.rs     | Rust            |        494 |        218 |         41 |        753 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/drivers/block/virtio_blk.rs | Rust            |         66 |          0 |         11 |         77 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/drivers/mod.rs              | Rust            |          2 |          0 |          1 |          3 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/entry.asm                   | RISC-V Assembly |         11 |          0 |          1 |         12 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/fs/inode.rs                 | Rust            |        143 |          7 |          9 |        159 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/fs/mod.rs                   | Rust            |         13 |          0 |          3 |         16 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/fs/pipe.rs                  | Rust            |        156 |          3 |          8 |        167 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/fs/stdio.rs                 | Rust            |         42 |          1 |          4 |         47 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/lang_items.rs               | Rust            |         11 |          0 |          2 |         13 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/linker-k210.ld              | LinkerScript    |         46 |          0 |          7 |         53 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/linker-qemu.ld              | LinkerScript    |         46 |          0 |          7 |         53 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/main.rs                     | Rust            |         46 |          0 |          6 |         52 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/mm/address.rs               | Rust            |        191 |          5 |         13 |        209 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/mm/frame_allocator.rs       | Rust            |        117 |          3 |         13 |        133 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/mm/heap_allocator.rs        | Rust            |         40 |          0 |          6 |         46 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/mm/memory_set.rs            | Rust            |        330 |         18 |         10 |        358 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/mm/mod.rs                   | Rust            |         26 |          0 |          2 |         28 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/mm/page_table.rs            | Rust            |        238 |          3 |         14 |        255 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/sbi.rs                      | Rust            |         36 |          0 |          8 |         44 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/syscall/fs.rs               | Rust            |        103 |          2 |          6 |        111 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/syscall/mod.rs              | Rust            |         35 |          0 |          5 |         40 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/syscall/process.rs          | Rust            |         91 |         16 |          8 |        115 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/task/context.rs             | Rust            |         14 |          0 |          4 |         18 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/task/manager.rs             | Rust            |         28 |          1 |          5 |         34 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/task/mod.rs                 | Rust            |         61 |         17 |         11 |         89 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/task/pid.rs                 | Rust            |         93 |          2 |         10 |        105 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/task/processor.rs           | Rust            |         82 |          2 |         12 |         96 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/task/switch.S               | RISC-V Assembly |         27 |          9 |          2 |         38 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/task/switch.rs              | Rust            |          7 |          0 |          2 |          9 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/task/task.rs                | Rust            |        195 |         28 |          7 |        230 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/timer.rs                    | Rust            |         14 |          0 |          4 |         18 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/trap/context.rs             | Rust            |         34 |          1 |          3 |         38 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/trap/mod.rs                 | Rust            |        101 |          6 |         11 |        118 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/os/src/trap/trap.S                 | RISC-V Assembly |         50 |         18 |          2 |         70 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/Cargo.toml                    | TOML            |          8 |          1 |          2 |         11 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/Makefile                      | Makefile        |         17 |          0 |          7 |         24 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/cat.rs                | Rust            |         31 |          0 |          3 |         34 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/cmdline_args.rs       | Rust            |         13 |          0 |          3 |         16 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/exit.rs               | Rust            |         25 |          0 |          5 |         30 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/fantastic_text.rs     | Rust            |         40 |          0 |          4 |         44 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/filetest_simple.rs    | Rust            |         33 |          0 |          5 |         38 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/forktest.rs           | Rust            |         30 |          0 |          4 |         34 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/forktest2.rs          | Rust            |         28 |          0 |          5 |         33 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/forktest_simple.rs    | Rust            |         23 |          2 |          3 |         28 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/forktree.rs           | Rust            |         31 |          0 |          7 |         38 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/hello_world.rs        | Rust            |          9 |          0 |          2 |         11 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/initproc.rs           | Rust            |         31 |          0 |          3 |         34 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/matrix.rs             | Rust            |         61 |          0 |          7 |         68 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/pipe_large_test.rs    | Rust            |         52 |         13 |          4 |         69 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/pipetest.rs           | Rust            |         31 |          9 |          4 |         44 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/run_pipe_test.rs      | Rust            |         18 |          0 |          3 |         21 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/sleep.rs              | Rust            |         26 |          0 |          4 |         30 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/sleep_simple.rs       | Rust            |         16 |          0 |          3 |         19 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/stack_overflow.rs     | Rust            |         14 |          0 |          3 |         17 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/user_shell.rs         | Rust            |        124 |          5 |          9 |        138 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/usertests.rs          | Rust            |         36 |          0 |          4 |         40 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/bin/yield.rs              | Rust            |         15 |          0 |          2 |         17 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/console.rs                | Rust            |         31 |          0 |          9 |         40 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/lang_items.rs             | Rust            |         11 |          0 |          1 |         12 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/lib.rs                    | Rust            |         94 |          2 |         12 |        108 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/linker.ld                 | LinkerScript    |         29 |          0 |          3 |         32 |
+| /Users/zhaiqiming/i_can_own_os/rCore-Tutorial-v3/user/src/syscall.rs                | Rust            |         65 |          0 |         14 |         79 |
+| Total                                                                               |                 |      5,232 |        475 |        524 |      6,231 |
++-------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
