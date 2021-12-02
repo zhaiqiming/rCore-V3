@@ -125,6 +125,7 @@ impl PageTable {
         assert!(!pte.is_valid(), "vpn {:?} is mapped before mapping", vpn);
         *pte = PageTableEntry::new(ppn, flags | PTEFlags::V);
     }
+    
     #[allow(unused)]
     pub fn unmap(&mut self, vpn: VirtPageNum) {
         let pte = self.find_pte_create(vpn).unwrap();
@@ -143,6 +144,12 @@ impl PageTable {
                 let aligned_pa_usize: usize = aligned_pa.into();
                 (aligned_pa_usize + offset).into()
             })
+    }
+    pub fn find_vpn(&self, vpn: VirtPageNum) -> bool {
+        match self.find_pte(vpn) {
+            None => false,
+            Some(x) => x.is_valid(),
+        }
     }
     pub fn token(&self) -> usize {
         8usize << 60 | self.root_ppn.0

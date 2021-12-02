@@ -23,6 +23,8 @@ mod timer;
 mod mm;
 mod fs;
 mod drivers;
+mod comlog;
+
 
 global_asm!(include_str!("entry.asm"));
 
@@ -38,15 +40,25 @@ fn clear_bss() {
 
 #[no_mangle]
 pub fn rust_main() -> ! {
+    comlog::info!("[Kernel] init start");
     clear_bss();
-    println!("[kernel] Hello, world!");
+
+    comlog::init();
+    comlog::info!("comlog init finished!");
+
     mm::init();
+    comlog::info!("memory manager init finished!");
     mm::remap_test();
+
     trap::init();
+    comlog::info!("trap manager init finished!");
     trap::enable_timer_interrupt();
+
     timer::set_next_trigger();
     fs::list_apps();
     task::add_initproc();
+
+    comlog::info!("[Kernel] init finished, start to run tasks");
     task::run_tasks();
     panic!("Unreachable in rust_main!");
 }

@@ -8,7 +8,7 @@ use lazy_static::*;
 use bitflags::*;
 use alloc::vec::Vec;
 use spin::Mutex;
-use super::File;
+use super::{File,StatMode};
 use crate::mm::UserBuffer;
 
 pub struct OSInode {
@@ -18,6 +18,7 @@ pub struct OSInode {
 }
 
 pub struct OSInodeInner {
+    // nlink: usize,
     offset: usize,
     inode: Arc<Inode>,
 }
@@ -27,11 +28,16 @@ impl OSInode {
         readable: bool,
         writable: bool,
         inode: Arc<Inode>,
+        // mut nlink_num: usize,
     ) -> Self {
+        // if nlink_num == 0 {
+        //     nlink_num += 1;
+        // }
         Self {
             readable,
             writable,
             inner: Mutex::new(OSInodeInner {
+                // nlink: nlink_num,
                 offset: 0,
                 inode,
             }),
@@ -98,19 +104,25 @@ pub fn open_file(name: &str, flags: OpenFlags) -> Option<Arc<OSInode>> {
         if let Some(inode) = ROOT_INODE.find(name) {
             // clear size
             inode.clear();
+            // let nlink = ROOT_INODE.count_nlink(inode.get_inode_id());
+            // println!("Nlink {}", nlink);
             Some(Arc::new(OSInode::new(
                 readable,
                 writable,
                 inode,
+                // nlink,
             )))
         } else {
             // create file
             ROOT_INODE.create(name)
                 .map(|inode| {
+                    // let nlink = ROOT_INODE.count_nlink(inode.get_inode_id());
+                    // println!("Nlink {}", nlink);
                     Arc::new(OSInode::new(
                         readable,
                         writable,
                         inode,
+                        // nlink,
                     ))
                 })
         }
@@ -120,13 +132,38 @@ pub fn open_file(name: &str, flags: OpenFlags) -> Option<Arc<OSInode>> {
                 if flags.contains(OpenFlags::TRUNC) {
                     inode.clear();
                 }
+                // let nlink = ROOT_INODE.count_nlink(inode.get_inode_id());
+                // println!("Nlink {}", nlink);
                 Arc::new(OSInode::new(
                     readable,
                     writable,
-                    inode
+                    inode,
+                    // nlink,
                 ))
             })
     }
+}
+
+pub fn get_nlink_num(inode_id: usize) -> usize {
+    ROOT_INODE.count_nlink(inode_id) as usize
+}
+
+pub fn find_inode_by_name(name: &str) -> Option<Arc<Inode>> {
+    ROOT_INODE.find(name)
+}
+
+pub fn link_file(path_old: &str, path_new: &str) -> bool {
+    if let Some(inode_old) = ROOT_INODE.find(path_old) {
+        ROOT_INODE.copy(inode_old.get_inode_id(), path_new);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+pub fn unlink_file(path: &str) -> bool {
+    // println!("Unlink : {}", path);
+    ROOT_INODE.delete_dir(path)
 }
 
 impl File for OSInode {
@@ -156,4 +193,24 @@ impl File for OSInode {
         }
         total_write_size
     }
+
+    // fn get_nlink_amount(&self) -> usize {
+    //     self.inner.lock().nlink
+    // }
+    fn get_inode_number(&self) -> usize {
+        self.inner.lock().inode.get_inode_id()
+    }
+    fn get_file_type(&self) -> StatMode {
+        if self.inner.lock().inode.is_dir() {
+            StatMode::DIR
+        } else {
+            StatMode::FILE
+        }
+    }
+    // fn increase_one_nlink(&self) {
+    //     self.inner.lock().nlink += 1;
+    // }
+    // fn decrease_one_nlink(&self) {
+    //     self.inner.lock().nlink -= 1;
+    // }
 }
